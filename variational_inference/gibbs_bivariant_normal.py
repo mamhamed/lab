@@ -1,13 +1,7 @@
 import edward as ed
 import tensorflow as tf
-
 import matplotlib.pyplot as plt
-import numpy as np
 
-
-"""
-Inspired by https://wiseodd.github.io/techblog/2015/10/09/gibbs-sampling/
-"""
 
 sess = tf.Session()
 
@@ -18,6 +12,9 @@ mvn = ed.models.MultivariateNormalTriL(loc=mu, scale_tril=scale)
 
 data = mvn.sample(5000).eval(session=sess)
 plt.hist2d([x[0] for x in data], [x[1] for x in data], bins=100)
+plt.xlabel("X0")
+plt.ylabel("X1")
+plt.title("Distribution coming from Gibbs sampling.")
 plt.show()
 
 x0 = tf.placeholder(shape=[], dtype=tf.float32)
